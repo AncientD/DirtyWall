@@ -25,18 +25,6 @@ namespace Dirtywall
                 this.lb_Search_Category.Items.Add(item);
         }
 
-        private void BT_remove_Click(object sender, EventArgs e)
-        {
-            if (this.lb_Search_Category.SelectedItems.Count == 1)
-                this.lb_Search_Category.Items.Remove(this.lb_Search_Category.SelectedItem);
-        }
-
-        private void BT_Add_category_Click(object sender, EventArgs e)
-        {
-            if (this.tb_category.Text.Length > 1)
-                this.lb_Search_Category.Items.Add(this.tb_category.Text);
-        }
-
         private void BT_ok_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
@@ -51,6 +39,29 @@ namespace Dirtywall
             Dirtywall.Program.interval = Convert.ToInt32(this.nud_interval.Value);
 
             Close();
+        }
+
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string newCategory = Microsoft.VisualBasic.Interaction.InputBox("Input category name", "New category", "");
+            if (!string.IsNullOrEmpty(newCategory))
+                lb_Search_Category.Items.Add(newCategory);
+        }
+
+        private void renameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.lb_Search_Category.SelectedIndex != -1)
+            {
+                string newNameCategory = Microsoft.VisualBasic.Interaction.InputBox("Input category name", "New name category", "");
+                this.lb_Search_Category.Items.Insert(this.lb_Search_Category.SelectedIndex, newNameCategory);
+                this.lb_Search_Category.Items.Remove(this.lb_Search_Category.SelectedItem);
+            }
+        }
+
+        private void removeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.lb_Search_Category.SelectedItems.Count == 1)
+                this.lb_Search_Category.Items.Remove(this.lb_Search_Category.SelectedItem);
         }
     }
 }
