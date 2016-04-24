@@ -11,6 +11,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Diagnostics;
 using Dirtywall.Properties;
+using System.Xml.Linq;
 
 namespace Dirtywall
 {
@@ -21,13 +22,26 @@ namespace Dirtywall
         public static int interval = 15;
         private static NotifyIcon trayIcon = new NotifyIcon();
         static XmlDocument config = new XmlDocument();
-        static string configStr = File.ReadAllText("config.xml");
+        static string configStr;
 
         static void mainSegment()
         {
             query = "";
             searchQuery = "";
             interval = 15;
+            try
+            {
+                configStr = File.ReadAllText("config.xml");
+            }
+            catch (Exception ex)
+            {
+                XElement config =
+                    new XElement("config",
+                        new XElement("query", "car|abstract"),
+                        new XElement("interval", "12"));
+                configStr = config.ToString();
+                config.Save("config.xml");
+            }
             Random seed = new Random();
             try
             {

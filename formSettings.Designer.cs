@@ -84,7 +84,7 @@
             // 
             // nud_interval
             // 
-            this.nud_interval.Location = new System.Drawing.Point(83, 321);
+            this.nud_interval.Location = new System.Drawing.Point(83, 331);
             this.nud_interval.Name = "nud_interval";
             this.nud_interval.Size = new System.Drawing.Size(120, 22);
             this.nud_interval.TabIndex = 5;
@@ -92,7 +92,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 323);
+            this.label2.Location = new System.Drawing.Point(12, 333);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 17);
             this.label2.TabIndex = 6;
