@@ -113,9 +113,7 @@ namespace Dirtywall
         private static void Settings_Click(object sender, EventArgs e)
         {
             config.LoadXml(configStr);
-            Form1 settings = new Form1(searchQuery, interval);
-            settings.Text = "Settings";
-            if (settings.ShowDialog() == DialogResult.OK)
+            if (new formSettings(searchQuery, interval).ShowDialog() == DialogResult.OK)
             {
                 config.GetElementsByTagName("query")[0].InnerText = searchQuery;
                 config.GetElementsByTagName("interval")[0].InnerText = interval.ToString();

@@ -1,6 +1,6 @@
 ﻿namespace Dirtywall
 {
-    partial class Form1
+    partial class formSettings
     {
         /// <summary>
         /// Required designer variable.
@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lb_Search_Category = new System.Windows.Forms.ListBox();
+            this.tb_category = new System.Windows.Forms.TextBox();
             this.BT_Add_category = new System.Windows.Forms.Button();
             this.BT_remove = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.nud_interval = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.BT_ok = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_interval)).BeginInit();
             this.SuspendLayout();
             // 
-            // listBox1
+            // lb_Search_Category
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Items.AddRange(new object[] {
+            this.lb_Search_Category.FormattingEnabled = true;
+            this.lb_Search_Category.ItemHeight = 16;
+            this.lb_Search_Category.Items.AddRange(new object[] {
             "jtdyjd",
             "yjd",
             "tyj",
@@ -50,17 +50,17 @@
             "jd",
             "tyjdt",
             "yj"});
-            this.listBox1.Location = new System.Drawing.Point(12, 12);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(308, 308);
-            this.listBox1.TabIndex = 0;
+            this.lb_Search_Category.Location = new System.Drawing.Point(12, 12);
+            this.lb_Search_Category.Name = "lb_Search_Category";
+            this.lb_Search_Category.Size = new System.Drawing.Size(308, 308);
+            this.lb_Search_Category.TabIndex = 0;
             // 
-            // textBox1
+            // tb_category
             // 
-            this.textBox1.Location = new System.Drawing.Point(15, 327);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(116, 22);
-            this.textBox1.TabIndex = 2;
+            this.tb_category.Location = new System.Drawing.Point(15, 327);
+            this.tb_category.Name = "tb_category";
+            this.tb_category.Size = new System.Drawing.Size(116, 22);
+            this.tb_category.TabIndex = 2;
             // 
             // BT_Add_category
             // 
@@ -82,12 +82,12 @@
             this.BT_remove.UseVisualStyleBackColor = true;
             this.BT_remove.Click += new System.EventHandler(this.BT_remove_Click);
             // 
-            // numericUpDown1
+            // nud_interval
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(83, 366);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 22);
-            this.numericUpDown1.TabIndex = 5;
+            this.nud_interval.Location = new System.Drawing.Point(83, 366);
+            this.nud_interval.Name = "nud_interval";
+            this.nud_interval.Size = new System.Drawing.Size(120, 22);
+            this.nud_interval.TabIndex = 5;
             // 
             // label2
             // 
@@ -108,24 +108,24 @@
             this.BT_ok.UseVisualStyleBackColor = true;
             this.BT_ok.Click += new System.EventHandler(this.BT_ok_Click);
             // 
-            // Form1
+            // formSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(332, 454);
             this.Controls.Add(this.BT_ok);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.nud_interval);
             this.Controls.Add(this.BT_remove);
             this.Controls.Add(this.BT_Add_category);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.tb_category);
+            this.Controls.Add(this.lb_Search_Category);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "formSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.Text = "Settings";
+            ((System.ComponentModel.ISupportInitialize)(this.nud_interval)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -133,11 +133,11 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ListBox lb_Search_Category;
+        private System.Windows.Forms.TextBox tb_category;
         private System.Windows.Forms.Button BT_Add_category;
         private System.Windows.Forms.Button BT_remove;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown nud_interval;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button BT_ok;
     }

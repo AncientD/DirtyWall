@@ -21,7 +21,7 @@ namespace Dirtywall
                     string[] keywords = searchQuery.Split(new string[] { "|" }, StringSplitOptions.None);
                     query = keywords.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
 
-                   /* string prePage = web.DownloadString("http://alpha.wallhaven.cc/search?q=" + query + "&categories=101&purity=100");
+                    string prePage = web.DownloadString("http://alpha.wallhaven.cc/search?q=" + query + "&categories=101&purity=100");
                     HtmlDocument preWallhavenPage = new HtmlDocument();
                     preWallhavenPage.LoadHtml(prePage);
 
@@ -33,10 +33,10 @@ namespace Dirtywall
                         pages = 1;
                     }
                     int currentPage = seed.Next(1, pages);
-                    currentPage = currentPage > 0 ? currentPage : 1;*/
+                    currentPage = currentPage > 0 ? currentPage/2 : 1;
 
 
-                    string page = web.DownloadString("http://alpha.wallhaven.cc/search?q=" + query.Replace(" ","+") + "&categories=101&purity=100&sorting=random&order=desc&page=1");
+                    string page = web.DownloadString("http://alpha.wallhaven.cc/search?q=" + query.Replace(" ","+") + "&categories=101&purity=100&sorting=random&order=desc&page="+ currentPage);
                     HtmlDocument wallhavenPage = new HtmlDocument();
                     wallhavenPage.LoadHtml(page);
 
