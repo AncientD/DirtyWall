@@ -35,6 +35,7 @@ namespace Dirtywall
             }
             catch (Exception ex)
             {
+                Directory.CreateDirectory("cache");
                 XElement config =
                     new XElement("config",
                         new XElement("query", "car|abstract"),
@@ -42,7 +43,6 @@ namespace Dirtywall
                 configStr = config.ToString();
                 config.Save("config.xml");
             }
-            Random seed = new Random();
             try
             {
                 string[] files = Directory.GetFiles("cache", "*.jpg");

@@ -32,11 +32,11 @@ namespace Dirtywall
                     {
                         pages = 1;
                     }
-                    int currentPage = seed.Next(1, pages);
-                    currentPage = currentPage > 0 ? currentPage/2 : 1;
+                    int currentPage = seed.Next(1, pages > 1 ? pages/2 : 1);
+                    currentPage = currentPage > 0 ? currentPage : 1;
 
 
-                    string page = web.DownloadString("http://alpha.wallhaven.cc/search?q=" + query.Replace(" ","+") + "&categories=101&purity=100&sorting=random&order=desc&page="+ currentPage);
+                    string page = web.DownloadString("http://alpha.wallhaven.cc/search?q=" + query.Replace(" ","+") + "&categories=101&purity=100&sorting=random&order=desc&page="+currentPage);
                     HtmlDocument wallhavenPage = new HtmlDocument();
                     wallhavenPage.LoadHtml(page);
 
