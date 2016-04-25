@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace Dirtywall
 {
@@ -15,8 +18,7 @@ namespace Dirtywall
         public formSettings(string query, int interval)
         {
             InitializeComponent();
-            this.nud_interval.Maximum = 200;
-            this.nud_interval.Minimum = 1;
+
             this.nud_interval.Value = interval;
 
             string[] keywords = query.Split(new string[] { "|" }, StringSplitOptions.None);
@@ -62,6 +64,42 @@ namespace Dirtywall
         {
             if (this.lb_Search_Category.SelectedItems.Count == 1)
                 this.lb_Search_Category.Items.Remove(this.lb_Search_Category.SelectedItem);
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                XmlDocument config = new XmlDocument();
+                config.LoadXml(File.ReadAllText(openFileDialog1.FileName));
+
+                nud_interval.Value = Convert.ToInt32(config.GetElementsByTagName("interval")[0].InnerText);
+                string[] keywords = config.GetElementsByTagName("query")[0].InnerText.Split(new string[] { "|" }, StringSplitOptions.None);
+
+                this.lb_Search_Category.Items.Clear();
+                foreach (string item in keywords)
+                    this.lb_Search_Category.Items.Add(item);
+            }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string str = "";
+                for (int i = 0; i < this.lb_Search_Category.Items.Count; i++)
+                {
+                    str += this.lb_Search_Category.Items[i];
+                    if (i + 1 < this.lb_Search_Category.Items.Count)
+                        str += "|";
+                }
+
+                XElement config =
+                    new XElement("config",
+                        new XElement("query", str),
+                        new XElement("interval", this.nud_interval.Value.ToString()));
+                config.Save(saveFileDialog1.FileName);
+            }
         }
     }
 }

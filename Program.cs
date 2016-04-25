@@ -28,12 +28,12 @@ namespace Dirtywall
         {
             query = "";
             searchQuery = "";
-            interval = 15;
+
             try
             {
                 configStr = File.ReadAllText("config.xml");
             }
-            catch (Exception ex)
+            catch (FileNotFoundException ex)
             {
                 Directory.CreateDirectory("cache");
                 XElement config =
@@ -43,6 +43,7 @@ namespace Dirtywall
                 configStr = config.ToString();
                 config.Save("config.xml");
             }
+
             try
             {
                 string[] files = Directory.GetFiles("cache", "*.jpg");
@@ -78,15 +79,15 @@ namespace Dirtywall
             nextWallpaper.Index = 0;
             nextWallpaper.Click += NextWallpaper_Click;
 
-            MenuItem cleanCache = new MenuItem();
-            cleanCache.Text = "Clean Cache";
-            cleanCache.Index = 2;
-            cleanCache.Click += CleanCache_Click;
-
             MenuItem openCache = new MenuItem();
             openCache.Text = "Open Cache";
             openCache.Index = 1;
             openCache.Click += OpenCache_Click;
+
+            MenuItem cleanCache = new MenuItem();
+            cleanCache.Text = "Clean Cache";
+            cleanCache.Index = 2;
+            cleanCache.Click += CleanCache_Click;
 
             MenuItem settings = new MenuItem();
             settings.Text = "Settings";
@@ -103,7 +104,6 @@ namespace Dirtywall
             trayMenu.MenuItems.Add(cleanCache);
             trayMenu.MenuItems.Add(settings);
             trayMenu.MenuItems.Add(exitApp);
-
 
             trayIcon.ContextMenu = trayMenu;
 
