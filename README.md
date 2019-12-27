@@ -5,7 +5,9 @@ Loads random .jpg wallpaper from <a href="http://wallhaven.cc" target="_blank">w
 
 1. Build project, then copy binaries in proper directory (<b>NOTE : this project uses <a href="https://htmlagilitypack.codeplex.com/" target="_blank">HtmlAgility Pack</a>, NuGet must be enabled during build</b>) 
 2. Default config will be created at first run, edit it and run <code>DirtyWall.exe</code>
-3. You may change configuration using <code>Settings</code> in tray icon
+3. You may change configuration using <code>Settings</code> in tray icon.
+
+Please follow to <a href="https://github.com/AncientD/DirtyWall/releases" target="_blank">Releases link</a> if you will use ready version
 
 ###config.xml syntax
 
