@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -61,7 +61,7 @@ namespace Dirtywall
 
             while (true)
             {
-                WallhavenParser.parseAndSet(query, searchQuery);
+                WallhavenParser.ParseAndSet(query, searchQuery);
                 Thread.Sleep(interval * 1000 * 60);
             }
         }
@@ -103,7 +103,7 @@ namespace Dirtywall
 
             trayIcon.Icon = Resources.curr_icon;
             trayIcon.Visible = true;
-            trayIcon.ShowBalloonTip(100, "Dirty wall", "Программа запущена!", ToolTipIcon.Info);
+            //trayIcon.ShowBalloonTip(100, "Dirty wall", "Программа запущена!", ToolTipIcon.Info);
 
             Thread mainThread = new Thread(mainSegment);
             mainThread.Priority = ThreadPriority.Highest;

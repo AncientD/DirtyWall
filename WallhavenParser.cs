@@ -1,4 +1,4 @@
-﻿using HtmlAgilityPack;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +11,10 @@ namespace Dirtywall
 {
     class WallhavenParser
     {
-        public static void parseAndSet(string query, string searchQuery)
+        private static string MainUrl = "http://wallhaven.cc";
+        private static string MainSearchUrl = MainUrl + "/search?q=";
+        private static string MainUrlFullImage = "http://w.wallhaven.cc/full";
+        public static void ParseAndSet(string query, string searchQuery)
         {
             Random seed = new Random();
             using (WebClient web = new WebClient())
@@ -21,7 +24,7 @@ namespace Dirtywall
                     string[] keywords = searchQuery.Split(new string[] { "|" }, StringSplitOptions.None);
                     query = keywords.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
 
-                    string prePage = web.DownloadString("http://wallhaven.cc/search?q=" + query + "&categories=101&purity=100");
+                    string prePage = web.DownloadString(MainSearchUrl + query + "&categories=101&purity=100");
                     HtmlDocument preWallhavenPage = new HtmlDocument();
                     preWallhavenPage.LoadHtml(prePage);
 
@@ -36,7 +39,7 @@ namespace Dirtywall
                     currentPage = currentPage > 0 ? currentPage : 1;
 
 
-                    string page = web.DownloadString("http://wallhaven.cc/search?q=" + query.Replace(" ", "+") + "&categories=101&purity=100&sorting=random&order=desc&page=" + currentPage);
+                    string page = web.DownloadString(MainSearchUrl + query.Replace(" ","+") + "&categories=101&purity=100&sorting=random&order=desc&page="+currentPage);
                     HtmlDocument wallhavenPage = new HtmlDocument();
                     wallhavenPage.LoadHtml(page);
 
@@ -46,9 +49,10 @@ namespace Dirtywall
                     var randomImage = imagesList.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
                     string imageId = randomImage.GetAttributeValue("data-wallpaper-id", "1");
 
-                    string absolute = Path.GetFullPath("cache/" + imageId + ".jpg");
+                    string absolute = Path.GetFullPath($"cache/{ imageId }.jpg");
+                    string firstTwoChar = new string(imageId.Take(2).ToArray());
 
-                    web.DownloadFile("http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-" + imageId + ".jpg", "cache/" + imageId + ".jpg");
+                    web.DownloadFile($"{MainUrlFullImage}/{ firstTwoChar }/wallhaven-{ imageId }.jpg", $"cache/{ imageId }.jpg");
                     Wallpaper.Set(new Uri(absolute), Wallpaper.Style.Stretched);
                 }
                 catch (Exception ex)
