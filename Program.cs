@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HtmlAgilityPack;
 using System.Threading;
 using System.Net;
 using System.Xml;
+using System.Xml.Linq;
 using System.IO;
 using System.Windows.Forms;
 using System.Diagnostics;
 using Dirtywall.Properties;
-using System.Xml.Linq;
 
 namespace Dirtywall
 {
@@ -47,7 +46,7 @@ namespace Dirtywall
             try
             {
                 string[] files = Directory.GetFiles("cache", "*.jpg");
-                foreach(string file in files)
+                foreach (string file in files)
                 {
                     File.Delete(file);
                 }
@@ -55,9 +54,9 @@ namespace Dirtywall
                 searchQuery = config.GetElementsByTagName("query")[0].InnerText;
                 interval = Convert.ToInt32(config.GetElementsByTagName("interval")[0].InnerText);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                File.AppendAllText("error.log", ex.Source + "-----" + ex.Message + "\r\n"+ex.ToString());
+                File.AppendAllText("error.log", ex.Source + "-----" + ex.Message + "\r\n" + ex.ToString());
             }
 
             while (true)
@@ -65,7 +64,7 @@ namespace Dirtywall
                 WallhavenParser.parseAndSet(query, searchQuery);
                 Thread.Sleep(interval * 1000 * 60);
             }
-       }
+        }
 
         [STAThread]
         static void Main(string[] args)
@@ -73,39 +72,34 @@ namespace Dirtywall
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            ContextMenu trayMenu = new ContextMenu();
-            MenuItem nextWallpaper = new MenuItem();
+            ContextMenuStrip trayMenu = new ContextMenuStrip();
+            ToolStripMenuItem nextWallpaper = new ToolStripMenuItem();
             nextWallpaper.Text = "Next";
-            nextWallpaper.Index = 0;
             nextWallpaper.Click += NextWallpaper_Click;
 
-            MenuItem openCache = new MenuItem();
+            ToolStripMenuItem openCache = new ToolStripMenuItem();
             openCache.Text = "Open Cache";
-            openCache.Index = 1;
             openCache.Click += OpenCache_Click;
 
-            MenuItem cleanCache = new MenuItem();
+            ToolStripMenuItem cleanCache = new ToolStripMenuItem();
             cleanCache.Text = "Clean Cache";
-            cleanCache.Index = 2;
             cleanCache.Click += CleanCache_Click;
 
-            MenuItem settings = new MenuItem();
+            ToolStripMenuItem settings = new ToolStripMenuItem();
             settings.Text = "Settings";
-            settings.Index = 3;
             settings.Click += Settings_Click;
 
-            MenuItem exitApp = new MenuItem();
+            ToolStripMenuItem exitApp = new ToolStripMenuItem();
             exitApp.Text = "Exit";
-            exitApp.Index = 4;
             exitApp.Click += ExitApp_Click;
 
-            trayMenu.MenuItems.Add(nextWallpaper);
-            trayMenu.MenuItems.Add(openCache);
-            trayMenu.MenuItems.Add(cleanCache);
-            trayMenu.MenuItems.Add(settings);
-            trayMenu.MenuItems.Add(exitApp);
+            trayMenu.Items.Add(nextWallpaper);
+            trayMenu.Items.Add(openCache);
+            trayMenu.Items.Add(cleanCache);
+            trayMenu.Items.Add(settings);
+            trayMenu.Items.Add(exitApp);
 
-            trayIcon.ContextMenu = trayMenu;
+            trayIcon.ContextMenuStrip = trayMenu;
 
             trayIcon.Icon = Resources.curr_icon;
             trayIcon.Visible = true;
@@ -140,7 +134,8 @@ namespace Dirtywall
             string[] images = Directory.GetFiles("cache/", "*.jpg");
             foreach (var file in images)
             {
-                try {
+                try
+                {
                     File.Delete(file);
                 }
                 catch { }
@@ -156,7 +151,7 @@ namespace Dirtywall
 
         private static void NextWallpaper_Click(object sender, EventArgs e)
         {
-            WallhavenParser.parseAndSet(query,searchQuery);
+            WallhavenParser.parseAndSet(query, searchQuery);
         }
     }
 }
